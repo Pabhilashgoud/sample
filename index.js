@@ -1,15 +1,6 @@
 /**
  * Module Imports
  */
-const express = require('express')
-const app = express();
-const port = 3000
-
-app.get('/', (require, res) => res.send('Hi Bro! My heart Is Beating'))
-
-app.listen(port, () =>
-console.log('your app is listening a http://localhost:${port}')
-);
 
 
 const { Client, Collection } = require("discord.js");
