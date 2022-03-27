@@ -1,6 +1,17 @@
 /**
  * Module Imports
  */
+const express = require('express')
+const app = express();
+const port = 3000
+
+app.get('/', (require, res) => res.send('Hi Bro! My heart Is Beating'))
+
+app.listen(port, () =>
+console.log('your app is listening a http://localhost:${port}')
+);
+
+
 const { Client, Collection } = require("discord.js");
 const { readdirSync } = require("fs");
 const { join } = require("path");
@@ -23,11 +34,65 @@ const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
  * Client Events
  */
 client.on("ready", () => {
-  console.log(`${client.user.username} ready!`);
-  client.user.setActivity(`${PREFIX}help and ${PREFIX}play`, { type: "LISTENING" });
+    console.log(`${client.user.username} ready!`);
+    console.log(`Ready on ${client.guilds.cache.size} servers, for a total of ${client.users.cache.size} users`);
+  
+    client.user.setActivity(`In ${client.guilds.cache.size} Servers of ${client.users.cache.size} Users | m!invite m!play|`,{ type: "PLAYING" }); 
+     
+    setInterval(() => {
+        client.user.setActivity(`In ${client.guilds.cache.size} Servers of ${client.users.cache.size} Users `,{ type: "PLAYING" }); 
+    }, 10000); // Runs this every 10 seconds.
+  });
+
+console.log(`Ready on ${client.guilds.cache.size} servers, for a total of ${client.users.cache.size} users`);
+
+//setMaxListeners(number)
+//getMaxListeners();
+
+const EventEmitter = require("events");
+class MyEmitter extends EventEmitter{}
+
+EventEmitter.defaultMaxListeners = 500;
+
+var emitter = new MyEmitter();
+var emitter2 = new MyEmitter();
+var emitter3 = new MyEmitter();
+var emitter4 = new MyEmitter();
+var emitter5 = new MyEmitter();
+var emitter6 = new MyEmitter();
+var emitter7 = new MyEmitter();
+var emitter8 = new MyEmitter();
+var emitter9 = new MyEmitter();
+var emitter10 = new MyEmitter();
+var emitter11 = new MyEmitter();
+var emitter12 = new MyEmitter();
+var emitter13 = new MyEmitter();
+var emitter14 = new MyEmitter();
+var emitter15 = new MyEmitter();
+
+// emitter.setMaxListeners(40);
+console.log(`emitter: ${emitter.getMaxListeners()}`);
+console.log(`emitter2: ${emitter2.getMaxListeners()}`);
+console.log(`emitter3: ${emitter3.getMaxListeners()}`);
+console.log(`emitter4: ${emitter4.getMaxListeners()}`);
+console.log(`emitter5: ${emitter5.getMaxListeners()}`);
+console.log(`emitter15: ${emitter5.getMaxListeners()}`);
+
+emitter.emit("data");
+emitter.emit("message");
+
+
+client.on("guildCreate", guild => {
+	// This event triggers when the bot joins a guild.
+	console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
+	//client.user.setActivity(`Serving ${client.guilds.size} servers`);
 });
-client.on("warn", (info) => console.log(info));
-client.on("error", console.error);
+
+client.on("guildDelete", guild => {
+	// this event triggers when the bot is removed from a guild.
+	console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
+	//client.user.setActivity(`Serving ${client.guilds.size} servers`);
+});
 
 /**
  * Import all commands
