@@ -2,7 +2,6 @@ const i18n = require("../util/i18n");
 
 module.exports = {
   name: "ping",
-  aliases: ["pg"],
   cooldown: 10,
   description: i18n.__("ping.description"),
   execute(message) {
